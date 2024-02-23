@@ -8,6 +8,10 @@ terraform {
       source  = "hashicorp/vsphere"
       version = "~> 2.5"
     }
+    hcp = {
+      source  = "hashicorp/hcp"
+      version = "~> 0"
+    }
   }
 }
 
