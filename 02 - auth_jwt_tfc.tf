@@ -3,7 +3,7 @@ data "tfe_organization" "this" {
 }
 resource "vault_jwt_auth_backend_role" "this" {
   backend         = "jwt"
-  role_name       = "tfc"
+  role_name       = var.github_username
   token_policies  = [
     "terraform_cloud",
     "generate_certificate",
