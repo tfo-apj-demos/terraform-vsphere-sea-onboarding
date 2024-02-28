@@ -17,7 +17,7 @@ resource "vault_jwt_auth_backend_role" "this" {
     sub = "organization:${var.tfc_organization_name}:*"
     terraform_organization_id = data.tfe_organization.this.id
   }
-  user_claim      = "terraform_full_workspace"
+  user_claim      = "terraform_workspace_id"
   role_type       = "jwt"
 
   claim_mappings = {
