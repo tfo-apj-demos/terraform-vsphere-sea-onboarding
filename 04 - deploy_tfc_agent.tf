@@ -23,7 +23,7 @@ module "tfc-agent" {
   primary_datastore = var.primary_datastore
   folder_path       = var.folder_path
   networks          = var.networks
-  template          = data.hcp_packer_image.base-ubuntu-2204.external_identifier
+  template          = data.hcp_packer_artifact.this.external_identifier
 
   userdata = templatefile("${path.module}/templates/userdata.yaml.tmpl", {
     agent_token = tfe_agent_token.this.token
