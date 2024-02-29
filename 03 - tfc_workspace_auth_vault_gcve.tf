@@ -23,7 +23,7 @@ resource "tfe_variable" "this" {
   for_each = toset(local.gcve_workspace_identity_tfc_vars)
 
   key             = each.value
-  value           = data.hcp_vault_secrets_secret.this[each.value].secret_value
+  value           = each.value == "TFC_VAULT_RUN_ROLE" ? vault_jwt_auth_backend_role.this.name : data.hcp_vault_secrets_secret.this[each.value].secret_value
   category        = "env"
   variable_set_id = tfe_variable_set.this.id
   sensitive       = true
