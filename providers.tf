@@ -4,6 +4,10 @@ terraform {
       source = "hashicorp/tfe"
       version = "~> 0"
     }
+    nsxt = {
+      source  = "vmware/nsxt"
+      version = "~> 3.4"
+    }
     vsphere = {
       source  = "hashicorp/vsphere"
       version = "~> 2.5"
