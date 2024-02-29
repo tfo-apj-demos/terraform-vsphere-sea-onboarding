@@ -15,7 +15,7 @@ resource "tfe_agent_token" "this" {
 }
 
 module "tfc-agent" {
-  source  = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=tags/v1.2.0"
+  source  = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=v1.2.0"
 
   hostname          = "tfc-agent-${count.index}"
   datacenter        = var.datacenter
