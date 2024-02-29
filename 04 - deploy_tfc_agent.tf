@@ -40,6 +40,4 @@ module "tfc-agent" {
   })
 
   tags = var.tags
-
-  count = var.instance_count
 }

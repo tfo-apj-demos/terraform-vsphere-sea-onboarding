@@ -28,21 +28,10 @@ variable "folder_path" {
   type        = string
 }
 
-variable "networks" {
-  description = "Network configuration for the VM."
-  type        = map(string)
-}
-
 variable "tags" {
   description = "Tags to assign to the VM."
   type        = map(string)
   default     = {
     "application" = "tfc-agent"
   }
-}
-
-variable "instance_count" {
-  description = "The number of instances to create."
-  type        = number
-  default     = 1
 }
