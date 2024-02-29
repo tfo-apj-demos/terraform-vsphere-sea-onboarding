@@ -33,11 +33,6 @@ variable "networks" {
   type        = map(string)
 }
 
-variable "agent_token" {
-  description = "The token for the Terraform Cloud agent."
-  type        = string
-}
-
 variable "tags" {
   description = "Tags to assign to the VM."
   type        = map(string)
