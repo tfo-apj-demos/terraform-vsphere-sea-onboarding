@@ -1,8 +1,8 @@
-data "hcp_packer_image" "base-ubuntu-2204" {
-  bucket_name    = "base-ubuntu-2204"
-  channel        = "latest"
-  cloud_provider = "vsphere"
-  region         = "Datacenter"
+data "hcp_packer_artifact" "this" {
+  bucket_name  = "base-ubuntu-2204"
+  channel_name = "latest"
+  platform     = "vsphere"
+  region       = "Datacenter"
 }
 
 resource "tfe_agent_pool" "this" {
