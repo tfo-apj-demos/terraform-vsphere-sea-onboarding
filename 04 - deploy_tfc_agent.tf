@@ -24,7 +24,7 @@ resource "nsxt_policy_ip_address_allocation" "this" {
 module "tfc-agent" {
   source  = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=v1.2.0"
 
-  hostname          = "tfc-agent-${count.index}"
+  hostname          = "tfc-agent-${var.github_username}"
   datacenter        = var.datacenter
   cluster           = var.cluster
   primary_datastore = var.primary_datastore
@@ -36,7 +36,7 @@ module "tfc-agent" {
 
   userdata = templatefile("${path.module}/templates/userdata.yaml.tmpl", {
     agent_token = tfe_agent_token.this.token
-    agent_name  = "tfc-agent-${count.index}"
+    agent_name  = "tfc-agent-${github_username}"
   })
 
   tags = var.tags
