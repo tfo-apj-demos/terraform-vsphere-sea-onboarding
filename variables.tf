@@ -35,3 +35,13 @@ variable "tags" {
     "application" = "tfc-agent"
   }
 }
+
+variable "dns_server_list" {
+  description = "List of DNS servers to use."
+  type        = list(string)
+}
+
+variable "gateway" {  
+  description = "The gateway for the VM."
+  type        = string
+}
