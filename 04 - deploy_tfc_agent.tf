@@ -35,7 +35,7 @@ module "tfc-agent" {
   }
   dns_server_list = var.dns_server_list
   gateway         = var.gateway
-  dns_suffix_list = ["hashicorp.local"]
+  dns_suffix_list = var.dns_suffix_list
 
 
   userdata = templatefile("${path.module}/templates/userdata.yaml.tmpl", {

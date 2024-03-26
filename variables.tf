@@ -45,3 +45,8 @@ variable "gateway" {
   description = "The gateway for the VM."
   type        = string
 }
+
+variable "dns_suffix_list" {
+  description = "List of DNS suffixes to use."
+  type        = list(string)
+}
