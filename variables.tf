@@ -31,7 +31,7 @@ variable "folder_path" {
 variable "tags" {
   description = "Tags to assign to the VM."
   type        = map(string)
-  default     = {
+  default = {
     "application" = "tfc-agent"
   }
 }
@@ -41,7 +41,7 @@ variable "dns_server_list" {
   type        = list(string)
 }
 
-variable "gateway" {  
+variable "gateway" {
   description = "The gateway for the VM."
   type        = string
 }

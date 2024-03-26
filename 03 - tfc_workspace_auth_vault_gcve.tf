@@ -10,14 +10,14 @@ locals {
 }
 
 data "hcp_vault_secrets_secret" "this" {
-  for_each = toset(local.gcve_workspace_identity_tfc_vars)
+  for_each    = toset(local.gcve_workspace_identity_tfc_vars)
   app_name    = "gcve-tfc-workspace-identity"
   secret_name = each.value
 }
 
 resource "tfe_variable_set" "this" {
-  name          = "gcve_workspace_identity_tfc"
-  }
+  name = "gcve_workspace_identity_tfc"
+}
 
 resource "tfe_variable" "this" {
   for_each = toset(local.gcve_workspace_identity_tfc_vars)
