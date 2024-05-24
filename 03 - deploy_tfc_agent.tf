@@ -1,21 +1,14 @@
 data "hcp_packer_artifact" "this" {
-  bucket_name  = "base-ubuntu-2204"
+  bucket_name  = "docker-ubuntu-2204"
   channel_name = "latest"
   platform     = "vsphere"
   region       = "Datacenter"
-}
-resource "tfe_agent_pool" "this" {
-  name = "gcve_agent_pool"
-}
-
-resource "tfe_agent_token" "this" {
-  agent_pool_id = tfe_agent_pool.this.id
-  description   = "agent token for vsphere environment"
 }
 
 data "nsxt_policy_ip_pool" "this" {
   display_name = "10 - gcve-foundations"
 }
+
 resource "nsxt_policy_ip_address_allocation" "this" {
   display_name = "tfc-agent-${var.github_username}"
   pool_path    = data.nsxt_policy_ip_pool.this.path

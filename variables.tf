@@ -50,3 +50,8 @@ variable "dns_suffix_list" {
   description = "List of DNS suffixes to use."
   type        = list(string)
 }
+
+variable "tfc_project_name" {
+  description = "The name of the Terraform Cloud project."
+  type        = string
+}
