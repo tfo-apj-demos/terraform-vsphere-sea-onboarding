@@ -14,7 +14,7 @@ resource "vault_jwt_auth_backend_role" "this" {
   bound_audiences   = ["vault.tfc.workspace.identity"]
   bound_claims_type = "glob"
   bound_claims = {
-    sub                       = "organization:${var.tfc_organization_name}:*"
+    sub                       = "organization:${var.tfc_organization_name}:project:${var.tfc_project_name}:*"
     terraform_organization_id = data.tfe_organization.this.id
   }
   user_claim = "terraform_workspace_id"
