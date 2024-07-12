@@ -6,11 +6,11 @@ terraform {
     }
     nsxt = {
       source  = "vmware/nsxt"
-      version = "3.4"
+      version = "~> 3"
     }
     vsphere = {
       source  = "hashicorp/vsphere"
-      version = "~> 2.5"
+      version = "~> 2"
     }
     hcp = {
       source  = "hashicorp/hcp"
