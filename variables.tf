@@ -11,21 +11,25 @@ variable "github_username" {
 variable "datacenter" {
   description = "The datacenter in which the VM will be deployed."
   type        = string
+  default = "Datacenter"
 }
 
 variable "cluster" {
   description = "The cluster in which the VM will be deployed."
   type        = string
+  default = "Cluster"
 }
 
 variable "primary_datastore" {
   description = "The primary datastore for the VM."
   type        = string
+  default = "vsanDatastore"
 }
 
 variable "folder_path" {
   description = "The folder path where the VM will be located."
   type        = string
+  default     = "sea-tfc-agents"
 }
 
 variable "tags" {
@@ -49,6 +53,7 @@ variable "gateway" {
 variable "dns_suffix_list" {
   description = "List of DNS suffixes to use."
   type        = list(string)
+  default = [ "hashicorp.local" ]
 }
 
 variable "tfc_project_name" {

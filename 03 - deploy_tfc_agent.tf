@@ -1,3 +1,8 @@
+data "vault_kv_secret_v2" "this" {
+  mount = "secrets"
+  name  = "hcp_sp/grantorchard"
+}
+
 data "hcp_packer_artifact" "this" {
   bucket_name  = "docker-ubuntu-2204"
   channel_name = "latest"
