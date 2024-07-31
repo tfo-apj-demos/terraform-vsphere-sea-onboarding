@@ -1,6 +1,6 @@
 data "vault_kv_secret_v2" "this" {
   mount = "secrets"
-  name  = "hcp_sp/grantorchard"
+  name  = "hcp_sp/${var.github_username}"
 }
 
 data "hcp_packer_artifact" "this" {
