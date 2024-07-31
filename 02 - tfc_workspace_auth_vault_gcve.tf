@@ -59,7 +59,7 @@ resource "tfe_project_variable_set" "this" {
 resource "tfe_workspace" "this" {
   organization = var.tfc_organization_name
   project_id   = tfe_project.this.id
-  name         = "my-first-vsphere-vm" 
+  name         = "hello-vmware"
 }
 
 resource "tfe_workspace_settings" "this" {
