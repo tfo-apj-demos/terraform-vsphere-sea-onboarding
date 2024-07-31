@@ -11,19 +11,19 @@ variable "github_username" {
 variable "datacenter" {
   description = "The datacenter in which the VM will be deployed."
   type        = string
-  default = "Datacenter"
+  default     = "Datacenter"
 }
 
 variable "cluster" {
   description = "The cluster in which the VM will be deployed."
   type        = string
-  default = "Cluster"
+  default     = "cluster"
 }
 
 variable "primary_datastore" {
   description = "The primary datastore for the VM."
   type        = string
-  default = "vsanDatastore"
+  default     = "vsanDatastore"
 }
 
 variable "folder_path" {
@@ -43,20 +43,23 @@ variable "tags" {
 variable "dns_server_list" {
   description = "List of DNS servers to use."
   type        = list(string)
+  default     = ["172.21.15.150", "10.10.0.8"]
 }
 
 variable "gateway" {
   description = "The gateway for the VM."
   type        = string
+  default     = "172.21.12.1"
 }
 
 variable "dns_suffix_list" {
   description = "List of DNS suffixes to use."
   type        = list(string)
-  default = [ "hashicorp.local" ]
+  default     = ["hashicorp.local"]
 }
 
 variable "tfc_project_name" {
   description = "The name of the Terraform Cloud project."
   type        = string
+  default     = "Default Project"
 }
