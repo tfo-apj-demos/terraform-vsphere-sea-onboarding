@@ -33,6 +33,10 @@ provider "hcp" {
 }
 
 provider "vault" {
+  address = "https://vault.hashicorp.local:8200"
+  auth_login_oidc {
+    role = "systems_engineer"
+  }
   skip_child_token = true
 }
 

@@ -61,5 +61,5 @@ variable "dns_suffix_list" {
 variable "tfc_project_name" {
   description = "The name of the Terraform Cloud project."
   type        = string
-  default     = "Default Project"
+  default     = "VMware-Project"
 }

@@ -46,7 +46,7 @@ resource "tfe_agent_token" "this" {
 
 // Configure Project
 resource "tfe_project" "this" {
-  name         = "VMware Demo"
+  name         = var.tfc_project_name
   organization = var.tfc_organization_name
 }
 
