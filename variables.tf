@@ -4,7 +4,7 @@ variable "vault_address" {
 }
 
 variable "boundary_address" {
-  type    = string
+  type        = string
   description = "HCP Boundary Address"
 }
 
