@@ -5,7 +5,7 @@ variable "vault_address" {
 
 variable "boundary_address" {
   type    = string
-  default = "https://8b596635-91df-45a3-8455-1ecbf5e8c43e.boundary.hashicorp.cloud"
+  description = "HCP Boundary Address"
 }
 
 variable "tfc_organization_name" {
