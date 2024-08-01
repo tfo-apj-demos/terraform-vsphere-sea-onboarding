@@ -20,6 +20,10 @@ terraform {
       source  = "vmware/nsxt"
       version = "~> 3"
     }
+    boundary = {
+      source  = "hashicorp/boundary"
+      version = "~> 1"
+    }
   }
 }
 
@@ -33,7 +37,7 @@ provider "hcp" {
 }
 
 provider "vault" {
-  address = "https://vault.hashicorp.local:8200"
+  address = var.vault_address
   auth_login_oidc {
     role = "systems_engineer"
   }
@@ -50,4 +54,8 @@ provider "nsxt" {
   username = "${data.vault_ldap_static_credentials.nsx_read_only.username}@hashicorp.local"
   password = data.vault_ldap_static_credentials.nsx_read_only.password
   host     = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
+}
+
+provider "boundary" {
+  addr = var.boundary_address
 }

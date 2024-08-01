@@ -15,7 +15,7 @@ resource "nsxt_policy_ip_address_allocation" "this" {
 }
 
 module "tfc-agent" {
-  source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=v1.2.0"
+  source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=1.0.0"
 
   hostname          = "tfc-agent-${var.github_username}"
   datacenter        = var.datacenter

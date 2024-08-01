@@ -1,3 +1,13 @@
+variable "vault_address" {
+  description = "GCVE Vault"
+  default     = "https://vault.hashicorp.local:8200"
+}
+
+variable "boundary_address" {
+  type    = string
+  default = "https://8b596635-91df-45a3-8455-1ecbf5e8c43e.boundary.hashicorp.cloud"
+}
+
 variable "tfc_organization_name" {
   type        = string
   description = "The name of the Terraform Cloud organization."
