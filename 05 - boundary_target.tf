@@ -2,7 +2,7 @@ module "ssh_role" {
   source = "github.com/tfo-apj-demos/terraform-vault-ssh-role?ref=1.0.0"
 
   # insert required variables here
-  ssh_role_name = "${var.github_username}-${tfe_workspace.this.id}-tfc-agent-access"
+  ssh_role_name = "${var.github_username}-tfc-agent-access"
 }
 
 # --- Create Boundary targets for the TFC Agent
@@ -21,7 +21,8 @@ module "boundary_target" {
       name             = "ssh",
       type             = "ssh",
       port             = "22",
-      credential_paths = [module.ssh_role.credential_path]
+      credential_paths = ["module.ssh_role.credential_path",
+      ]
     }
   ]
 
