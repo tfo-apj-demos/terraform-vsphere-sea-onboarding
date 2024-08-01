@@ -13,18 +13,6 @@ output "ldap_username" {
   value = "${data.vault_ldap_static_credentials.vm_builder.username}@hashicorp.local"
 }
 
-data "vault_kv_secret_v2" "this" {
-  mount = "secrets"
-  name  = "hcp_sp/${var.github_username}"
-}
-
-data "hcp_packer_artifact" "this" {
-  bucket_name  = "docker-ubuntu-2204"
-  channel_name = "latest"
-  platform     = "vsphere"
-  region       = "Datacenter"
-}
-
 module "vm" {
   source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=v1.2.0"
 
@@ -37,7 +25,8 @@ module "vm" {
     "seg-general" : "dhcp"
   }
   
-  template = data.hcp_packer_artifact.this.external_identifier
+  #template = data.hcp_packer_artifact.this.external_identifier
+  template = "base-ubuntu-2204-20240728100948"
   tags = {
     "application" = "tfc-agent"
   }
