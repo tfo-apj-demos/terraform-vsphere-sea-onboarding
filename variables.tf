@@ -1,11 +1,11 @@
 variable "vault_address" {
-  description = "GCVE Vault"
-  default     = "https://vault.hashicorp.local:8200"
+  description = "The address of the Vault server"
+  type        = string
 }
 
 variable "boundary_address" {
+  description = "The address of the Boundary server"
   type        = string
-  description = "HCP Boundary Address"
 }
 
 variable "tfc_organization_name" {

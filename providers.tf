@@ -45,15 +45,13 @@ provider "vault" {
 }
 
 provider "vsphere" {
-  user           = "${data.vault_ldap_static_credentials.vm_builder.username}@hashicorp.local"
-  password       = data.vault_ldap_static_credentials.vm_builder.password
-  vsphere_server = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
+  user     = "${data.vault_ldap_static_credentials.vm_builder.username}@hashicorp.local"
+  password = data.vault_ldap_static_credentials.vm_builder.password
 }
 
 provider "nsxt" {
   username = "${data.vault_ldap_static_credentials.nsx_read_only.username}@hashicorp.local"
   password = data.vault_ldap_static_credentials.nsx_read_only.password
-  host     = "nsx-98984.fe9dbbb3.asia-southeast1.gve.goog"
 }
 
 provider "boundary" {
