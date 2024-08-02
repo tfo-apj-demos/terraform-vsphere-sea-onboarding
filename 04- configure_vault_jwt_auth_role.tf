@@ -3,12 +3,14 @@ data "tfe_organization" "this" {
 }
 resource "vault_jwt_auth_backend_role" "this" {
   backend   = "jwt"
-  role_name = var.github_username
+  role_name = "tfc"
   token_policies = [
     "terraform_cloud",
     "generate_certificate",
     "create_child_token",
-    "ldap_reader"
+    "ldap_reader",
+    "create_ssh_role",
+    "create_workspace_policy"
   ]
 
   bound_audiences   = ["vault.tfc.workspace.identity"]
