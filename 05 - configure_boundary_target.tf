@@ -18,14 +18,14 @@ module "boundary_target" {
 
   services = [
     {
-      name = "ssh",
-      type = "ssh",
-      port = "22",
+      name             = "ssh",
+      type             = "ssh",
+      port             = "22",
       credential_paths = [module.ssh_role.credential_path]
     }
   ]
 
-  project_name    = "CloudbrokerAz" 
+  project_name    = "CloudbrokerAz"
   host_catalog_id = "hcst_fGHoRryL4N"
   hostname_prefix = "ssh-tfcagent"
 
