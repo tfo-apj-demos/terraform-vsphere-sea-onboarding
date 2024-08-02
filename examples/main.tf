@@ -9,10 +9,6 @@ provider "vsphere" {
   vsphere_server = "vcsa-98975.fe9dbbb3.asia-southeast1.gve.goog"
 }
 
-output "ldap_username" {
-  value = "${data.vault_ldap_static_credentials.vm_builder.username}@hashicorp.local"
-}
-
 module "vm" {
   source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=1.0.0"
 
@@ -36,7 +32,7 @@ module "ssh_role" {
   source = "github.com/tfo-apj-demos/terraform-vault-ssh-role?ref=1.0.0"
 
   # insert required variables here
-  ssh_role_name = "${var.github_username}-vm-access"
+  ssh_role_name = "${var.TFC_WORKSPACE_ID}-vm-access"
 }
 
 # --- Create Boundary targets for the TFC Agent

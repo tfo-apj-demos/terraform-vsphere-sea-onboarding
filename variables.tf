@@ -73,3 +73,13 @@ variable "tfc_project_name" {
   type        = string
   default     = "VMware-Project"
 }
+
+variable "BOUNDARY_TOKEN" {
+  description = "Boundary token"
+  type        = string
+}
+
+variable "BOUNDARY_ADDR" {
+  description = "Boundary address"
+  type        = string
+}
