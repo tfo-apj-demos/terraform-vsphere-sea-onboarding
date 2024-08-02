@@ -14,7 +14,7 @@ output "ldap_username" {
 }
 
 module "vm" {
-  source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=v1.2.0"
+  source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=1.0.0"
 
   hostname          = "demo-vm-cloudbrokerAz"
   datacenter        = "Datacenter"
@@ -30,4 +30,40 @@ module "vm" {
   tags = {
     "application" = "tfc-agent"
   }
+}
+
+module "ssh_role" {
+  source = "github.com/tfo-apj-demos/terraform-vault-ssh-role?ref=1.0.0"
+
+  # insert required variables here
+  ssh_role_name = "${var.github_username}-vm-access"
+}
+
+# --- Create Boundary targets for the TFC Agent
+module "boundary_target" {
+  source = "github.com/tfo-apj-demos/terraform-boundary-target?ref=1.0.0"
+
+  hosts = [
+    {
+      "hostname" = module.vm.virtual_machine_name
+      "address"  = module.vm.ip_address
+    }
+  ]
+
+  services = [
+    {
+      name = "ssh",
+      type = "ssh",
+      port = "22",
+      credential_paths = [module.ssh_role.credential_path]
+    }
+  ]
+
+  project_name    = "CloudbrokerAz" 
+  host_catalog_id = "hcst_fGHoRryL4N"
+  hostname_prefix = "ssh-CloudbrokerAz-vm"
+
+  credential_store_token = module.ssh_role.token
+  vault_address          = "https://vault.hashicorp.local:8200"
+  #vault_ca_cert          = file("${path.root}/ca_cert_dir/ca_chain.pem")
 }
