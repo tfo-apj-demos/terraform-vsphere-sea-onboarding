@@ -16,18 +16,36 @@ data "hcp_vault_secrets_secret" "this" {
 }
 
 // Configure TFC Organisation
-resource "tfe_variable_set" "this" {
-  name = "gcve_workspace_identity_tfc"
+resource "tfe_variable_set" "identity" {
+  for_each = {
+    "gcve_workspace_identity" = "gcve_workspace_identity_tfc",
+    "boundary_identity"       = "boundary_identity"
+  }
+
+  name = each.value
 }
 
-resource "tfe_variable" "this" {
+resource "tfe_variable" "gcve_workspace_identity" {
   for_each = toset(local.gcve_workspace_identity_tfc_vars)
 
   key             = each.value
   value           = each.value == "TFC_VAULT_RUN_ROLE" ? vault_jwt_auth_backend_role.this.role_name : data.hcp_vault_secrets_secret.this[each.value].secret_value
   category        = "env"
-  variable_set_id = tfe_variable_set.this.id
-  sensitive       = false
+  variable_set_id = tfe_variable_set.identity["gcve_workspace_identity"].id
+  sensitive       = each.value == "TFC_VAULT_ENCODED_CACERT"
+}
+
+resource "tfe_variable" "boundary" {
+  for_each = {
+    "BOUNDARY_TOKEN"   = var.BOUNDARY_TOKEN,
+    "BOUNDARY_ADDRESS" = var.BOUNDARY_ADDR
+  }
+
+  key             = each.key
+  value           = each.value
+  category        = "env"
+  variable_set_id = tfe_variable_set.identity["boundary_identity"].id
+  sensitive       = each.key == "BOUNDARY_TOKEN"
 }
 
 resource "tfe_agent_pool" "this" {
@@ -51,7 +69,12 @@ resource "tfe_project" "this" {
 }
 
 resource "tfe_project_variable_set" "this" {
-  variable_set_id = tfe_variable_set.this.id
+  for_each = {
+    "gcve_workspace_identity" = tfe_variable_set.identity["gcve_workspace_identity"].id,
+    "boundary_identity"       = tfe_variable_set.identity["boundary_identity"].id
+  }
+
+  variable_set_id = each.value
   project_id      = tfe_project.this.id
 }
 
