@@ -19,7 +19,7 @@ data "hcp_vault_secrets_secret" "this" {
 resource "tfe_variable_set" "identity" {
   for_each = {
     "gcve_workspace_identity" = "gcve_workspace_identity_tfc",
-    "boundary_identity"       = "boundary_identity"
+    "provider_config"         = "provider_config"
   }
 
   name = each.value
@@ -35,17 +35,20 @@ resource "tfe_variable" "gcve_workspace_identity" {
   sensitive       = each.value == "TFC_VAULT_ENCODED_CACERT"
 }
 
-resource "tfe_variable" "boundary" {
+// Consolidated provider configuration variables
+resource "tfe_variable" "provider_config" {
   for_each = {
-    "BOUNDARY_TOKEN"   = var.BOUNDARY_TOKEN,
-    "BOUNDARY_ADDRESS" = var.BOUNDARY_ADDR
+    "BOUNDARY_TOKEN"      = var.BOUNDARY_TOKEN,
+    "BOUNDARY_ADDRESS"    = var.boundary_address,
+    "VSPHERE_SERVER"      = var.vsphere_server,
+    "NSXT_MANAGER_HOST"   = var.nsxt_manager_host
   }
 
   key             = each.key
   value           = each.value
   category        = "env"
-  variable_set_id = tfe_variable_set.identity["boundary_identity"].id
-  sensitive       = each.key == "BOUNDARY_TOKEN"
+  variable_set_id = tfe_variable_set.identity["provider_config"].id
+  sensitive       = each.key == "BOUNDARY_TOKEN" // Consider if other keys need to be sensitive
 }
 
 resource "tfe_agent_pool" "this" {
@@ -71,7 +74,7 @@ resource "tfe_project" "this" {
 resource "tfe_project_variable_set" "this" {
   for_each = {
     "gcve_workspace_identity" = tfe_variable_set.identity["gcve_workspace_identity"].id,
-    "boundary_identity"       = tfe_variable_set.identity["boundary_identity"].id
+    "provider_config"         = tfe_variable_set.identity["provider_config"].id
   }
 
   variable_set_id = each.value
