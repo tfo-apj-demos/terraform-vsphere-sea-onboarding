@@ -8,6 +8,21 @@ variable "boundary_address" {
   type        = string
 }
 
+variable "BOUNDARY_TOKEN" {
+  description = "Boundary token"
+  type        = string
+}
+
+variable "vsphere_server" {
+  description = "The address of the vSphere server"
+  type        = string
+}
+
+variable "nsxt_manager_host" {
+  description = "The address of the NSX-T Manager"
+  type        = string
+}
+
 variable "tfc_organization_name" {
   type        = string
   description = "The name of the Terraform Cloud organization."
@@ -72,14 +87,4 @@ variable "tfc_project_name" {
   description = "The name of the Terraform Cloud project."
   type        = string
   default     = "VMware-Project"
-}
-
-variable "BOUNDARY_TOKEN" {
-  description = "Boundary token"
-  type        = string
-}
-
-variable "BOUNDARY_ADDR" {
-  description = "Boundary address"
-  type        = string
 }
