@@ -21,21 +21,26 @@ terraform {
       version = "~> 1"
     }
   }
-  
+
   cloud {
     organization = "aaron-vm-demo"
     workspaces {
       project = "VMware-Project"
-      name = "hello-vmware"
+      name    = "hello-vmware"
     }
   }
 }
 
 provider "vault" {
-  address = "https://vault.hashicorp.local:8200"
+  address          = var.vault_address
   skip_child_token = true
 }
 
+provider "vsphere" {
+  user     = "${data.vault_ldap_static_credentials.vm_builder.username}@hashicorp.local"
+  password = data.vault_ldap_static_credentials.vm_builder.password
+}
+
 provider "boundary" {
-  addr = "https://8b596635-91df-45a3-8455-1ecbf5e8c43e.boundary.hashicorp.cloud"
+  addr = var.boundary_address
 }
