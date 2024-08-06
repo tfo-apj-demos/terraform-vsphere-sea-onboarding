@@ -52,5 +52,5 @@ module "boundary_target" {
   hostname_prefix = "ssh-CloudbrokerAz-vm"
 
   credential_store_token = module.ssh_role.token
-  vault_address          = "https://vault.hashicorp.local:8200"
+  vault_address          = var.vault_address
 }
