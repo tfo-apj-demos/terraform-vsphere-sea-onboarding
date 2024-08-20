@@ -25,7 +25,7 @@ module "boundary_target" {
     }
   ]
 
-  project_name    = "var.github_username"
+  project_name    = var.github_username
   hostname_prefix = "ssh-tfcagent"
 
   credential_store_token = module.ssh_role.token
