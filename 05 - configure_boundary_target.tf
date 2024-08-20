@@ -25,8 +25,7 @@ module "boundary_target" {
     }
   ]
 
-  project_name    = "CloudbrokerAz"
-  host_catalog_id = "hcst_fGHoRryL4N"
+  project_name    = "var.github_username"
   hostname_prefix = "ssh-tfcagent"
 
   credential_store_token = module.ssh_role.token
