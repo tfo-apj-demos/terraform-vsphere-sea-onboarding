@@ -43,13 +43,15 @@ resource "tfe_variable" "provider_config" {
     "VSPHERE_SERVER"    = var.vsphere_server,
     "NSXT_MANAGER_HOST" = var.nsxt_manager_host
     "VAULT_ADDR"        = var.vault_address,
+    "HCP_CLIENT_ID"     = data.vault_kv_secret_v2.this.data.client_id
+    "HCP_CLIENT_SECRET" = data.vault_kv_secret_v2.this.data.client_secret
   }
 
   key             = each.key
   value           = each.value
   category        = "env"
   variable_set_id = tfe_variable_set.identity["provider_config"].id
-  sensitive       = each.key == "BOUNDARY_TOKEN" // Consider if other keys need to be sensitive
+  sensitive       = each.key == "BOUNDARY_TOKEN" || each.key == "HCP_CLIENT_SECRET"
 }
 
 resource "tfe_agent_pool" "this" {
