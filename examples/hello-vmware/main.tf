@@ -32,7 +32,7 @@ module "ssh_role" {
 
 # --- Create Boundary targets for the TFC Agent
 module "boundary_target" {
-  source = "github.com/tfo-apj-demos/terraform-boundary-target?ref=1.0.3"
+  source = "github.com/tfo-apj-demos/terraform-boundary-target?ref=1.0.4"
 
   hosts = [
     {
