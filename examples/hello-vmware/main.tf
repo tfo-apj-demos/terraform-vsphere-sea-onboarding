@@ -16,9 +16,12 @@ module "vm" {
   }
 
   #template = data.hcp_packer_artifact.this.external_identifier
-  template = "base-ubuntu-2204-20240728100948"
+  #template = "base-ubuntu-2204-20240818101106"
+  template = "base-rhel-9-20240819054923"
+  
+  #insert any tags required for the VM
   tags = {
-    "application" = "tfc-agent"
+    "application" = var.github_username
   }
 }
 
@@ -29,7 +32,7 @@ module "ssh_role" {
 
 # --- Create Boundary targets for the TFC Agent
 module "boundary_target" {
-  source = "github.com/tfo-apj-demos/terraform-boundary-target?ref=1.0.0"
+  source = "github.com/tfo-apj-demos/terraform-boundary-target?ref=1.0.3"
 
   hosts = [
     {
@@ -47,9 +50,8 @@ module "boundary_target" {
     }
   ]
 
-  project_name    = "CloudbrokerAz"
-  host_catalog_id = "hcst_fGHoRryL4N"
-  hostname_prefix = "ssh-CloudbrokerAz-vm"
+  project_name    = var.github_username
+  hostname_prefix = "ssh-${var.github_username}-demo-vm"
 
   credential_store_token = module.ssh_role.token
   vault_address          = var.vault_address
