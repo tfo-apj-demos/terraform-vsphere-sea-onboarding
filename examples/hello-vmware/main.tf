@@ -3,6 +3,13 @@ data "vault_ldap_static_credentials" "vm_builder" {
   role_name = "vm_builder"
 }
 
+data "hcp_packer_artifact" "this" {
+  bucket_name  = "base-rhel-9"
+  channel_name = "latest"
+  platform     = "vsphere"
+  region       = "Datacenter"
+}
+
 module "vm" {
   source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=1.0.0"
 
@@ -15,9 +22,7 @@ module "vm" {
     "seg-general" : "dhcp"
   }
 
-  #template = data.hcp_packer_artifact.this.external_identifier
-  #template = "base-ubuntu-2204-20240818101106"
-  template = "base-rhel-9-20240819054923"
+  template = data.hcp_packer_artifact.this.external_identifier
   
   #insert any tags required for the VM
   tags = {
