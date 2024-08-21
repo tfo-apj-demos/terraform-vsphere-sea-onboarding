@@ -46,12 +46,12 @@ provider "vault" {
 
 provider "vsphere" {
   vsphere_server = var.vsphere_server
-  user     = "${data.vault_ldap_static_credentials.vm_builder.username}@hashicorp.local"
-  password = data.vault_ldap_static_credentials.vm_builder.password
+  user           = "${data.vault_ldap_static_credentials.vm_builder.username}@hashicorp.local"
+  password       = data.vault_ldap_static_credentials.vm_builder.password
 }
 
 provider "nsxt" {
-  host = var.nsxt_manager_host
+  host     = var.nsxt_manager_host
   username = "${data.vault_ldap_static_credentials.nsx_read_only.username}@hashicorp.local"
   password = data.vault_ldap_static_credentials.nsx_read_only.password
 }
