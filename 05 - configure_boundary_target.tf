@@ -7,7 +7,7 @@ module "ssh_role" {
 
 # --- Create Boundary targets for the TFC Agent
 module "boundary_target" {
-  source = "github.com/tfo-apj-demos/terraform-boundary-target?ref=1.0.3"
+  source = "github.com/tfo-apj-demos/terraform-boundary-target?ref=1.0.4"
 
   hosts = [
     {
@@ -26,7 +26,7 @@ module "boundary_target" {
   ]
 
   project_name    = var.github_username
-  hostname_prefix = "ssh-tfcagent"
+  hostname_prefix = "${var.github_username}-tfcagent"
 
   credential_store_token = module.ssh_role.token
   vault_address          = var.vault_address

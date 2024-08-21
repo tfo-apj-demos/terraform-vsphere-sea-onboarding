@@ -38,10 +38,11 @@ resource "tfe_variable" "gcve_workspace_identity" {
 // Consolidated provider configuration variables
 resource "tfe_variable" "provider_config" {
   for_each = {
-    "BOUNDARY_TOKEN"      = var.BOUNDARY_TOKEN,
-    "BOUNDARY_ADDRESS"    = var.boundary_address,
-    "VSPHERE_SERVER"      = var.vsphere_server,
-    "NSXT_MANAGER_HOST"   = var.nsxt_manager_host
+    "BOUNDARY_TOKEN"    = var.BOUNDARY_TOKEN,
+    "BOUNDARY_ADDRESS"  = var.boundary_address,
+    "VSPHERE_SERVER"    = var.vsphere_server,
+    "NSXT_MANAGER_HOST" = var.nsxt_manager_host
+    "VAULT_ADDR"        = var.vault_address,
   }
 
   key             = each.key

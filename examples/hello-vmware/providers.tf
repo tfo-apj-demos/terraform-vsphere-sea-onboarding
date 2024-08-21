@@ -23,7 +23,7 @@ terraform {
   }
 
   cloud {
-    organization = "aaron-vm-demo"
+    organization = ""
     workspaces {
       project = "VMware-Project"
       name    = "hello-vmware"

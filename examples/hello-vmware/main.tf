@@ -6,7 +6,7 @@ data "vault_ldap_static_credentials" "vm_builder" {
 module "vm" {
   source = "github.com/tfo-apj-demos/terraform-vsphere-virtual-machine?ref=1.0.0"
 
-  hostname          = "demo-vm-${var.github_username}"
+  hostname          = "demo-vm-${var.github_username}-${var.hostname_suffix}"
   datacenter        = "Datacenter"
   cluster           = "cluster"
   primary_datastore = "vsanDatastore"
@@ -21,7 +21,7 @@ module "vm" {
   
   #insert any tags required for the VM
   tags = {
-    "application" = var.github_username
+    "application" = var.vm_tag_application
   }
 }
 
@@ -51,7 +51,7 @@ module "boundary_target" {
   ]
 
   project_name    = var.github_username
-  hostname_prefix = "ssh-${var.github_username}-demo-vm"
+  hostname_prefix = "demo-vm-${var.github_username}-${var.hostname_suffix}"
 
   credential_store_token = module.ssh_role.token
   vault_address          = var.vault_address

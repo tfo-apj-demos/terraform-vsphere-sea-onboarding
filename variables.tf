@@ -9,7 +9,7 @@ variable "boundary_address" {
 }
 
 variable "BOUNDARY_TOKEN" {
-  description = "Boundary token"
+  description = "The token for the Boundary server"
   type        = string
 }
 
