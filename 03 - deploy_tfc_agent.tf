@@ -38,3 +38,12 @@ module "tfc-agent" {
 
   tags = var.tags
 }
+
+module "domain-name-system-management" {
+  source = "github.com/tfo-apj-demos/terraform-dns-domain-name-system-management?ref=1.0.1"
+
+  a_records = [{
+    name      = module.tfc-agent.virtual_machine_name
+    addresses = [module.tfc-agent.ip_address]
+  }]
+}

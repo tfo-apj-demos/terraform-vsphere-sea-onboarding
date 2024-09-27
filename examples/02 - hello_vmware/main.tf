@@ -23,7 +23,7 @@ module "vm" {
   }
 
   template = data.hcp_packer_artifact.this.external_identifier
-  
+
   #insert any tags required for the VM
   tags = {
     "application" = var.vm_tag_application
