@@ -9,4 +9,5 @@ module "onboarding" {
 
   github_username       = var.github_username
   tfc_organization_name = var.tfc_organization_name
+  enable_request_forwarding = false
 }
