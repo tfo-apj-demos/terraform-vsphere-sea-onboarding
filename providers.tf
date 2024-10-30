@@ -16,10 +16,6 @@ terraform {
       source  = "hashicorp/vsphere"
       version = "~> 2"
     }
-    nsxt = {
-      source  = "vmware/nsxt"
-      version = "~> 3"
-    }
     boundary = {
       source  = "hashicorp/boundary"
       version = "~> 1"
@@ -48,12 +44,6 @@ provider "vsphere" {
   vsphere_server = var.vsphere_server
   user           = "${data.vault_ldap_static_credentials.vm_builder.username}@hashicorp.local"
   password       = data.vault_ldap_static_credentials.vm_builder.password
-}
-
-provider "nsxt" {
-  host     = var.nsxt_manager_host
-  username = "${data.vault_ldap_static_credentials.nsx_read_only.username}@hashicorp.local"
-  password = data.vault_ldap_static_credentials.nsx_read_only.password
 }
 
 provider "boundary" {
