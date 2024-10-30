@@ -88,3 +88,9 @@ variable "tfc_project_name" {
   type        = string
   default     = "VMware-Project"
 }
+
+variable "enable_request_forwarding" {
+  description = "Enable request forwarding to the Boundary server."
+  type        = bool
+  default     = false
+}

@@ -34,6 +34,7 @@ module "tfc-agent" {
   userdata = templatefile("${path.module}/templates/userdata.yaml.tmpl", {
     agent_token = tfe_agent_token.this.token
     agent_name  = "tfc-agent-${var.github_username}"
+    enable_request_forwarding = var.enable_request_forwarding
   })
 
   tags = var.tags
