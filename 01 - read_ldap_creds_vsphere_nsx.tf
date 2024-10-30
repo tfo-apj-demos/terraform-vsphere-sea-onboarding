@@ -13,12 +13,6 @@ data "vault_ldap_static_credentials" "vm_builder" {
   role_name = "vm_builder"
 }
 
-# Usage: Fetch LDAP static credentials for NSX provider with read-only access
-data "vault_ldap_static_credentials" "nsx_read_only" {
-  mount     = local.vault_mount_ldap
-  role_name = "nsx_read_only"
-}
-
 # Usage: Retrieve specific secrets from Vault's KV secrets engine v2
 data "vault_kv_secret_v2" "this" {
   mount = local.vault_mount_secrets
