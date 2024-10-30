@@ -54,7 +54,7 @@ variable "primary_datastore" {
 variable "folder_path" {
   description = "The folder path where the VM will be located."
   type        = string
-  default     = "sea-tfc-agents"
+  default     = "Demo Workloads/sea-tfc-agents"
 }
 
 variable "tags" {
