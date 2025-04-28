@@ -21,6 +21,7 @@ resource "tfe_variable_set" "identity" {
     "gcve_workspace_identity" = "gcve_workspace_identity_tfc",
     "provider_config"         = "provider_config"
   }
+  global = true
 
   name = each.value
 }
@@ -56,12 +57,13 @@ resource "tfe_variable" "provider_config" {
 
 resource "tfe_agent_pool" "this" {
   name = "gcve_agent_pool"
+  organization_scoped = true
 }
 
-resource "tfe_agent_pool_allowed_workspaces" "this" {
+/*resource "tfe_agent_pool_allowed_workspaces" "this" {
   agent_pool_id         = tfe_agent_pool.this.id
   allowed_workspace_ids = [tfe_workspace.this.id]
-}
+}*/
 
 resource "tfe_agent_token" "this" {
   agent_pool_id = tfe_agent_pool.this.id
@@ -69,30 +71,30 @@ resource "tfe_agent_token" "this" {
 }
 
 // Configure Project
-resource "tfe_project" "this" {
-  name         = var.tfc_project_name
-  organization = var.tfc_organization_name
-}
+# resource "tfe_project" "this" {
+#   name         = var.tfc_project_name
+#   organization = var.tfc_organization_name
+# }
 
-resource "tfe_project_variable_set" "this" {
-  for_each = {
-    "gcve_workspace_identity" = tfe_variable_set.identity["gcve_workspace_identity"].id,
-    "provider_config"         = tfe_variable_set.identity["provider_config"].id
-  }
+# resource "tfe_project_variable_set" "this" {
+#   for_each = {
+#     "gcve_workspace_identity" = tfe_variable_set.identity["gcve_workspace_identity"].id,
+#     "provider_config"         = tfe_variable_set.identity["provider_config"].id
+#   }
 
-  variable_set_id = each.value
-  project_id      = tfe_project.this.id
-}
+#   variable_set_id = each.value
+#   project_id      = tfe_project.this.id
+# }
 
-// Configure Workspace
-resource "tfe_workspace" "this" {
-  organization = var.tfc_organization_name
-  project_id   = tfe_project.this.id
-  name         = "hello-vmware"
-}
+# // Configure Workspace
+# resource "tfe_workspace" "this" {
+#   organization = var.tfc_organization_name
+#   project_id   = tfe_project.this.id
+#   name         = "hello-vmware"
+# }
 
-resource "tfe_workspace_settings" "this" {
-  workspace_id   = tfe_workspace.this.id
-  execution_mode = "agent"
-  agent_pool_id  = tfe_agent_pool_allowed_workspaces.this.agent_pool_id
-}
+# resource "tfe_workspace_settings" "this" {
+#   workspace_id   = tfe_workspace.this.id
+#   execution_mode = "agent"
+#   agent_pool_id  = tfe_agent_pool_allowed_workspaces.this.agent_pool_id
+# }
